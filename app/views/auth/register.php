@@ -1,0 +1,36 @@
+<h1 class="h4 mb-3"><?php echo I18n::t('nav.register'); ?></h1>
+
+<?php if (!empty($errors)): ?>
+  <div class="alert alert-danger">
+    <ul class="mb-0"><?php foreach ($errors as $e): ?><li><?php echo htmlspecialchars($e); ?></li><?php endforeach; ?></ul>
+  </div>
+<?php endif; ?>
+
+<form method="post" class="card p-3 fade-in" style="max-width:520px">
+  <input type="hidden" name="csrf" value="<?php echo htmlspecialchars(Auth::csrfToken()); ?>">
+  <div class="mb-3">
+    <label class="form-label"><?php echo I18n::t('auth.name'); ?></label>
+    <input type="text" name="name" class="form-control" required minlength="3">
+  </div>
+  <div class="mb-3">
+    <label class="form-label"><?php echo I18n::t('auth.email'); ?></label>
+    <input type="email" name="email" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label"><?php echo I18n::t('auth.password'); ?></label>
+    <div class="position-relative">
+      <input type="password" name="password" id="password" class="form-control" required minlength="8">
+      <i class="bi bi-eye position-absolute top-50 end-0 translate-middle-y me-3" onclick="togglePassword('password')" style="cursor: pointer;"></i>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Langue</label>
+    <select class="form-select" name="lang">
+      <option value="fr">Français</option><option value="en">English</option><option value="mfe">Kreol</option>
+    </select>
+  </div>
+  <button class="btn btn-primary w-100" type="submit" id="submitBtn">
+    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+    <?php echo I18n::t('auth.register'); ?>
+  </button>
+</form>

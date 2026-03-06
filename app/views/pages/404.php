@@ -1,0 +1,1 @@
+<h1 class='h4'>404</h1><p>Route introuvable: <code><?php echo htmlspecialchars($route); ?></code></p>

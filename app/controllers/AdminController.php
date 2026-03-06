@@ -1,0 +1,56 @@
+<?php
+class AdminController {
+    private function requireAdmin(): void {
+        if (!Auth::check()) redirectTo('/login');
+        if (!Auth::isAdmin()) { http_response_code(403); exit('Accès refusé'); }
+    }
+
+    public function dashboard(): void {
+        $this->requireAdmin();
+        $pdo=Database::pdo();
+        $stats=[
+          'users'=>(int)$pdo->query("SELECT COUNT(*) c FROM users")->fetch()['c'],
+          'markets'=>(int)$pdo->query("SELECT COUNT(*) c FROM markets")->fetch()['c'],
+          'products'=>(int)$pdo->query("SELECT COUNT(*) c FROM products")->fetch()['c'],
+          'pending'=>(int)$pdo->query("SELECT COUNT(*) c FROM price_submissions WHERE status='pending'")->fetch()['c'],
+        ];
+        view('admin/dashboard', compact('stats'));
+    }
+
+    public function pending(): void {
+        $this->requireAdmin();
+        $pdo=Database::pdo();
+        $rows=$pdo->query("
+          SELECT s.id, s.price_date, s.price_rs, p.name AS product, m.name AS market, u.name AS contributor
+          FROM price_submissions s
+          JOIN products p ON p.id=s.product_id
+          JOIN markets m ON m.id=s.market_id
+          JOIN users u ON u.id=s.user_id
+          WHERE s.status='pending'
+          ORDER BY s.submitted_at ASC
+        ")->fetchAll();
+        view('admin/pending', compact('rows'));
+    }
+
+    public function approve(): void {
+        $this->requireAdmin();
+        if ($_SERVER['REQUEST_METHOD']!=='POST') redirectTo('/admin/pending');
+        Auth::verifyCsrf();
+        $id=(int)($_POST['id'] ?? 0);
+        $pdo=Database::pdo();
+        $stmt=$pdo->prepare("UPDATE price_submissions SET status='approved', reviewed_at=NOW() WHERE id=?");
+        $stmt->execute([$id]);
+        redirectTo('/admin/pending');
+    }
+
+    public function reject(): void {
+        $this->requireAdmin();
+        if ($_SERVER['REQUEST_METHOD']!=='POST') redirectTo('/admin/pending');
+        Auth::verifyCsrf();
+        $id=(int)($_POST['id'] ?? 0);
+        $pdo=Database::pdo();
+        $stmt=$pdo->prepare("UPDATE price_submissions SET status='rejected', reviewed_at=NOW() WHERE id=?");
+        $stmt->execute([$id]);
+        redirectTo('/admin/pending');
+    }
+}

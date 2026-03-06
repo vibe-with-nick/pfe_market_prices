@@ -1,0 +1,158 @@
+:root {
+  --bg-color: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --card-bg: rgba(255,255,255,0.95);
+  --text-color: #333;
+  --navbar-bg: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  --hero-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --footer-bg: #f8f9fa;
+  --border-color: rgba(0,0,0,0.1);
+}
+
+.dark {
+  --bg-color: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  --card-bg: rgba(52,58,64,0.95);
+  --text-color: #fff;
+  --navbar-bg: linear-gradient(90deg, #34495e 0%, #2c3e50 100%);
+  --hero-bg: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+  --footer-bg: #343a40;
+  --border-color: rgba(255,255,255,0.1);
+}
+
+body {
+  background: var(--bg-color);
+  min-height: 100vh;
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+.navbar {
+  background: var(--navbar-bg) !important;
+  transition: background 0.3s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.hero {
+  background: var(--hero-bg);
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero .btn-primary {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid white;
+  color: white;
+}
+
+.hero .btn-primary:hover {
+  background: white;
+  color: #667eea;
+}
+
+.hero .btn-outline-secondary {
+  border-color: white;
+  color: white;
+}
+
+.hero .btn-outline-secondary:hover {
+  background: white;
+  color: #667eea;
+}
+
+.dark .hero .btn-outline-secondary {
+  border-color: #fff;
+  color: #fff;
+}
+
+.dark .hero .btn-outline-secondary:hover {
+  background: #fff;
+  color: #34495e;
+}
+
+.card {
+  box-shadow: 0 4px 8px var(--border-color);
+  border: none;
+  transition: box-shadow 0.3s ease, background 0.3s;
+  background: var(--card-bg);
+  color: var(--text-color);
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px var(--border-color);
+}
+
+footer {
+  background: var(--footer-bg) !important;
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+}
+
+footer a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: var(--text-color);
+  opacity: 0.8;
+}
+
+.bi {
+  color: var(--text-color);
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border: none;
+  transition: box-shadow 0.3s ease;
+  background: rgba(255,255,255,0.95);
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0,123,255,0.1);
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  color: #007bff !important;
+}
+
+.alert {
+  border-radius: 0.5rem;
+}
+
+.position-relative .bi {
+  transition: color 0.3s ease;
+}
+
+.position-relative .bi:hover {
+  color: #007bff;
+}
