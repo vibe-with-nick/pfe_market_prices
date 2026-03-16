@@ -1,10 +1,50 @@
-<h1 class="h4 mb-3"><?php echo I18n::t('admin.panel'); ?></h1>
-<div class="row g-3">
-  <div class="col-md-3"><div class="card p-3"><div class="text-muted small">Users</div><div class="h3 mb-0"><?php echo (int)$stats['users']; ?></div></div></div>
-  <div class="col-md-3"><div class="card p-3"><div class="text-muted small">Markets</div><div class="h3 mb-0"><?php echo (int)$stats['markets']; ?></div></div></div>
-  <div class="col-md-3"><div class="card p-3"><div class="text-muted small">Products</div><div class="h3 mb-0"><?php echo (int)$stats['products']; ?></div></div></div>
-  <div class="col-md-3"><div class="card p-3"><div class="text-muted small">Pending</div><div class="h3 mb-0"><?php echo (int)$stats['pending']; ?></div></div></div>
+<div class="page-header">
+  <span class="section-num">Administration</span>
+  <h1 class="page-title"><?php echo I18n::t('admin.panel'); ?></h1>
 </div>
-<div class="mt-3">
-  <a class="btn btn-primary" href="<?php echo $app['base_url']; ?>/admin/pending"><?php echo I18n::t('admin.pending'); ?></a>
+
+<span class="section-num mb-3 d-block">Vue d'ensemble</span>
+
+<div class="row g-3 mb-5" style="background: var(--bg-dark); padding: 2rem; border-radius: 4px; border: 1px solid var(--border-dark); margin-left:0; margin-right:0;">
+  <div class="col-6 col-md-3">
+    <div style="padding: 1.5rem 0;">
+      <div style="font-family:var(--f-sans); font-size:0.65rem; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted-light); margin-bottom:0.65rem;">
+        Utilisateurs
+      </div>
+      <div class="data-num"><?php echo (int)$stats['users']; ?></div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div style="padding: 1.5rem 0; border-left: 1px solid var(--border-dark); padding-left: 2rem;">
+      <div style="font-family:var(--f-sans); font-size:0.65rem; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted-light); margin-bottom:0.65rem;">
+        Marchés
+      </div>
+      <div class="data-num"><?php echo (int)$stats['markets']; ?></div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div style="padding: 1.5rem 0; border-left: 1px solid var(--border-dark); padding-left: 2rem;">
+      <div style="font-family:var(--f-sans); font-size:0.65rem; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted-light); margin-bottom:0.65rem;">
+        Produits
+      </div>
+      <div class="data-num"><?php echo (int)$stats['products']; ?></div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div style="padding: 1.5rem 0; border-left: 1px solid var(--border-dark); padding-left: 2rem;">
+      <div style="font-family:var(--f-sans); font-size:0.65rem; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted-light); margin-bottom:0.65rem;">
+        En attente
+      </div>
+      <div style="font-family:var(--f-serif); font-size:3rem; font-weight:300; color:<?php echo ($stats['pending']>0) ? 'var(--gold)' : 'var(--text-muted-light)'; ?>; line-height:1;">
+        <?php echo (int)$stats['pending']; ?>
+      </div>
+    </div>
+  </div>
 </div>
+
+<a class="btn btn-primary" href="<?php echo $app['base_url']; ?>/admin/pending">
+  <?php echo I18n::t('admin.pending'); ?>
+  <?php if ($stats['pending'] > 0): ?>
+    <span class="badge badge-gold ms-2"><?php echo (int)$stats['pending']; ?></span>
+  <?php endif; ?>
+</a>

@@ -1,33 +1,41 @@
-<h1 class="h4 mb-1"><?php echo I18n::t('auth.forgot_password'); ?></h1>
-<p class="text-muted mb-4" style="font-size:.85rem;"><?php echo I18n::t('auth.forgot_password_hint'); ?></p>
+<div class="page-header">
+  <span class="section-num">Accès membre</span>
+  <h1 class="page-title"><?php echo I18n::t('auth.forgot_password'); ?></h1>
+  <p class="page-subtitle"><?php echo I18n::t('auth.forgot_password_hint'); ?></p>
+</div>
 
-<?php if (!empty($success)): ?>
-  <div class="alert alert-success fade-in" style="max-width:520px">
-    <i class="bi bi-check-circle me-2"></i><?php echo htmlspecialchars($success); ?>
-  </div>
-  <p class="mt-3" style="font-size:.85rem;">
-    <a href="<?php echo $app['base_url']; ?>/login">&larr; <?php echo I18n::t('nav.login'); ?></a>
-  </p>
-<?php else: ?>
+<div class="auth-wrapper">
+  <?php if (!empty($success)): ?>
+    <div class="alert alert-success mb-4">
+      <?php echo htmlspecialchars($success); ?>
+    </div>
+    <p style="font-size:0.82rem;">
+      <a href="<?php echo $app['base_url']; ?>/login"
+         style="color:var(--gold); text-decoration:none; letter-spacing:0.06em;">
+        &larr; <?php echo I18n::t('nav.login'); ?>
+      </a>
+    </p>
+  <?php else: ?>
+    <form method="post" class="card" style="padding: 2.5rem;">
+      <input type="hidden" name="csrf" value="<?php echo htmlspecialchars(Auth::csrfToken()); ?>">
 
-<form method="post" class="card p-4 fade-in" style="max-width:520px">
-  <input type="hidden" name="csrf" value="<?php echo htmlspecialchars(Auth::csrfToken()); ?>">
+      <div class="mb-4">
+        <label class="form-label"><?php echo I18n::t('auth.email'); ?></label>
+        <input type="email" name="email" class="form-control" required autofocus
+               placeholder="votre@email.com"
+               value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
+      </div>
 
-  <div class="mb-4">
-    <label class="form-label"><?php echo I18n::t('auth.email'); ?></label>
-    <input type="email" name="email" class="form-control" required autofocus
-           placeholder="vous@exemple.com"
-           value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
-  </div>
+      <button class="btn btn-primary w-100" type="submit" id="submitBtn">
+        <?php echo I18n::t('auth.send_reset_link'); ?>
+      </button>
 
-  <button class="btn btn-primary w-100" type="submit" id="submitBtn">
-    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-    <?php echo I18n::t('auth.send_reset_link'); ?>
-  </button>
-
-  <p class="text-center mt-3 mb-0" style="font-size:.8rem;">
-    <a href="<?php echo $app['base_url']; ?>/login">&larr; <?php echo I18n::t('nav.login'); ?></a>
-  </p>
-</form>
-
-<?php endif; ?>
+      <p class="text-center mt-4 mb-0" style="font-size:0.8rem; letter-spacing:0.04em;">
+        <a href="<?php echo $app['base_url']; ?>/login"
+           style="color:var(--text-muted); text-decoration:none;">
+          &larr; <?php echo I18n::t('nav.login'); ?>
+        </a>
+      </p>
+    </form>
+  <?php endif; ?>
+</div>

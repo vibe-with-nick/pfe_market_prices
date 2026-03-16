@@ -1,14 +1,15 @@
 (function () {
   const data = window.__HISTORY__ || [];
-  const el = document.getElementById('historyChart');
+  const el   = document.getElementById('historyChart');
   if (!el || data.length === 0) return;
 
   const isDark    = document.body.classList.contains('dark');
-  const ink       = isDark ? '#EFEDE7' : '#202520';
-  const inkMuted  = isDark ? '#B7B4AA' : '#5F665F';
-  const downColor = '#C4512D';
-  const gridColor = isDark ? 'rgba(239,237,231,0.10)' : 'rgba(32,37,32,0.12)';
-  const monoFont  = "'Space Mono', 'IBM Plex Mono', monospace";
+  const ink       = isDark ? '#F5F3EF' : '#0E0E0C';
+  const inkMuted  = isDark ? '#A8A49E' : '#8C8880';
+  const gridColor = isDark ? 'rgba(42,42,40,0.8)' : 'rgba(232,228,222,0.7)';
+  const gold      = '#C9A84C';
+  const goldFill  = isDark ? 'rgba(201,168,76,0.06)' : 'rgba(201,168,76,0.05)';
+  const sansFont  = "'Jost', system-ui, sans-serif";
 
   new Chart(el, {
     type: 'line',
@@ -17,48 +18,58 @@
       datasets: [{
         label: 'Prix (Rs)',
         data:   data.map(x => x.price),
-        borderColor: downColor,
-        backgroundColor: 'transparent',
-        borderWidth: 2,
-        pointRadius: 2,
-        pointHoverRadius: 2,
-        pointBackgroundColor: downColor,
-        pointBorderColor: 'transparent',
-        tension: 0,
-        fill: false,
+        borderColor:          gold,
+        backgroundColor:      goldFill,
+        borderWidth:          1.5,
+        pointRadius:          3,
+        pointHoverRadius:     5,
+        pointBackgroundColor: gold,
+        pointBorderColor:     isDark ? '#1C1C1A' : '#FFFFFF',
+        pointBorderWidth:     1.5,
+        tension:              0.3,
+        fill:                 true,
       }]
     },
     options: {
       responsive: true,
-      animation: false,
+      animation: { duration: 500, easing: 'easeInOutQuart' },
       plugins: {
         legend: {
           labels: {
             color: inkMuted,
-            font: { family: monoFont, size: 10 }
+            font: { family: sansFont, size: 10, weight: '500' },
+            boxWidth: 12,
+            boxHeight: 2,
           }
         },
         tooltip: {
-          backgroundColor: isDark ? '#1A1711' : '#FDFAF4',
-          borderColor: isDark ? 'rgba(234,228,216,0.20)' : 'rgba(26,24,20,0.18)',
-          borderWidth: 1,
-          titleColor: ink,
-          bodyColor: inkMuted,
-          bodyFont:  { family: monoFont },
-          titleFont: { family: monoFont, weight: '500' },
-          padding: 10,
-          cornerRadius: 0,
+          backgroundColor: isDark ? '#1C1C1A' : '#FFFFFF',
+          borderColor:     isDark ? '#2A2A28' : '#E8E4DE',
+          borderWidth:     1,
+          titleColor:      ink,
+          bodyColor:       inkMuted,
+          titleFont:       { family: sansFont, weight: '500', size: 12 },
+          bodyFont:        { family: sansFont, size: 12 },
+          padding:         14,
+          cornerRadius:    3,
+          callbacks: {
+            label: ctx => '  Rs ' + ctx.parsed.y.toFixed(2),
+          }
         }
       },
       scales: {
         x: {
-          ticks: { color: inkMuted, font: { family: monoFont, size: 10 } },
-          grid:  { color: gridColor }
+          ticks: {
+            color:       inkMuted,
+            font:        { family: sansFont, size: 10 },
+            maxRotation: 30,
+          },
+          grid: { color: gridColor }
         },
         y: {
           ticks: {
-            color: inkMuted,
-            font: { family: monoFont, size: 10 },
+            color:    inkMuted,
+            font:     { family: sansFont, size: 10 },
             callback: v => 'Rs ' + v
           },
           grid: { color: gridColor }
@@ -68,15 +79,17 @@
   });
 })();
 
+/* ── Mot de passe : afficher / masquer ─────────────────── */
 function togglePassword(id) {
-  const input = document.getElementById(id);
-  const icon  = input.nextElementSibling;
-  const isHidden = input.type === 'password';
-  input.type = isHidden ? 'text' : 'password';
-  icon.classList.toggle('bi-eye',       !isHidden);
-  icon.classList.toggle('bi-eye-slash',  isHidden);
+  const input  = document.getElementById(id);
+  const icon   = input.nextElementSibling;
+  const hidden = input.type === 'password';
+  input.type = hidden ? 'text' : 'password';
+  icon.classList.toggle('bi-eye',       !hidden);
+  icon.classList.toggle('bi-eye-slash',  hidden);
 }
 
+/* ── Thème clair / sombre ──────────────────────────────── */
 function toggleTheme() {
   const body        = document.body;
   const themeToggle = document.getElementById('themeToggle');
@@ -88,20 +101,29 @@ function toggleTheme() {
   localStorage.setItem('theme', isDark ? 'dark' : 'light');
 }
 
+/* ── Active nav link ───────────────────────────────────── */
+function markActiveNavLink() {
+  const path = window.location.pathname;
+  document.querySelectorAll('.navbar .nav-link, .mobile-nav-item').forEach(link => {
+    const href = (link.getAttribute('href') || '').split('?')[0];
+    if (href && path.endsWith(href)) link.classList.add('active');
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   /* Tooltips Bootstrap */
   document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
-    new bootstrap.Tooltip(el);
+    new bootstrap.Tooltip(el, { trigger: 'hover' });
   });
 
-  /* Désactiver le bouton submit au clic */
+  /* Désactiver le bouton submit au clic pour éviter le double envoi */
   document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', function () {
       const btn = form.querySelector('#submitBtn');
       if (btn) {
         btn.disabled = true;
         btn.innerHTML =
-          '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Chargement…';
+          '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Chargement…';
       }
     });
   });
@@ -115,4 +137,6 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     if (themeToggle) themeToggle.innerHTML = '<i class="bi bi-moon"></i>';
   }
+
+  markActiveNavLink();
 });
