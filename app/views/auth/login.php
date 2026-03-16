@@ -21,4 +21,8 @@
     <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
     <?php echo I18n::t('auth.login'); ?>
   </button>
+
+  <p class="text-center mt-3 mb-0" style="font-size:.8rem;">
+    <a href="<?php echo $app['base_url']; ?>/forgot-password"><?php echo I18n::t('auth.forgot_password_link'); ?></a>
+  </p>
 </form>

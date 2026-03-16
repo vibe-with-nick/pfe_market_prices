@@ -1,4 +1,5 @@
 <?php
+require __DIR__ . '/../models/Mailer.php';
 require __DIR__ . '/HomeController.php';
 require __DIR__ . '/AuthController.php';
 require __DIR__ . '/PriceController.php';
@@ -15,6 +16,9 @@ switch ($route) {
     case '/login': $auth->login(); break;
     case '/register': $auth->register(); break;
     case '/logout': $auth->logout(); break;
+    case '/forgot-password': $auth->forgotPassword(); break;
+    case '/reset-password':  $auth->resetPassword();  break;
+    case '/change-password': $auth->changePassword(); break;
     case '/prices': $price->index(); break;
     case '/prices/submit': $price->submit(); break;
     case '/prices/predict': $price->predict(); break;
