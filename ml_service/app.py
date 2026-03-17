@@ -5,11 +5,11 @@ from datetime import datetime
 app = Flask(__name__)
 
 def encode_season(season: str) -> np.ndarray:
-    mapping = {"summer":0, "autumn":1, "winter":2, "spring":3}
-    v = mapping.get((season or "").lower(), 0)
-    one = np.zeros(4, dtype=float)
-    one[v] = 1.0
-    return one
+    # Maurice : 2 saisons tropicales
+    # "ete"   = saison chaude/pluvieuse (nov–avr) → 1
+    # "hiver" = saison fraîche/sèche   (mai–oct)  → 0
+    v = 1.0 if (season or "").lower() == "ete" else 0.0
+    return np.array([v], dtype=float)
 
 def simple_regression(series, season):
     # series: list of {date, price}
@@ -56,7 +56,7 @@ def predict():
     data = request.get_json(force=True, silent=True) or {}
     series = data.get("series", [])
     target_date = data.get("target_date")
-    season = data.get("season", "summer")
+    season = data.get("season", "hiver")
 
     result, err = simple_regression(series, season)
     if err:
@@ -64,7 +64,7 @@ def predict():
 
     return jsonify({
         "ok": True,
-        "model": "ridge_linear_trend+season",
+        "model": "ridge_linear_trend+saison_tropicale",
         "predicted_price": round(result["pred"], 2),
         "target_date": target_date,
         "points": result["points"],

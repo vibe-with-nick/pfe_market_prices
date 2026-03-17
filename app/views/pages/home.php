@@ -7,18 +7,16 @@
     <a class="btn btn-primary" href="<?php echo $app['base_url']; ?>/prices">
       <?php echo I18n::t('btn.view_prices'); ?>
     </a>
-    <a class="btn btn-outline-secondary" href="<?php echo $app['base_url']; ?>/prices/submit"
-       style="border-color: rgba(201,168,76,0.30); color: var(--text-muted-light);">
+    <a class="btn btn-outline-secondary" href="<?php echo $app['base_url']; ?>/prices/submit">
       <?php echo I18n::t('btn.contribute'); ?>
     </a>
   </div>
 </div>
 
-<div class="d-flex justify-content-between align-items-baseline mb-3">
+<div class="section-heading">
   <span class="section-num mb-0">02 &mdash; Derniers prix approuvés</span>
-  <a href="<?php echo $app['base_url']; ?>/prices"
-     style="font-size:0.75rem; letter-spacing:0.10em; text-transform:uppercase; color:var(--gold); text-decoration:none;">
-    Voir tout <i class="bi bi-arrow-right ms-1"></i>
+  <a href="<?php echo $app['base_url']; ?>/prices" class="link-gold">
+    Voir tout
   </a>
 </div>
 

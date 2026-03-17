@@ -117,10 +117,8 @@ class PriceController {
     }
 
     private function season(int $m): string {
-        if (in_array($m, [12, 1, 2], true)) return 'summer';
-        if (in_array($m, [3,  4, 5], true)) return 'autumn';
-        if (in_array($m, [6,  7, 8], true)) return 'winter';
-        return 'spring';
+        // Maurice : saison chaude/pluvieuse nov–avr, fraîche/sèche mai–oct
+        return in_array($m, [11, 12, 1, 2, 3, 4], true) ? 'ete' : 'hiver';
     }
 
     private function callMl(string $url, array $payload): ?array {

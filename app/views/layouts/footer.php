@@ -61,7 +61,7 @@
       </div>
       <div class="col-md-2">
         <h6>Réseaux</h6>
-        <div class="d-flex gap-3">
+        <div class="social-links d-flex gap-2">
           <a href="#"><i class="bi bi-facebook"></i></a>
           <a href="#"><i class="bi bi-twitter-x"></i></a>
           <a href="#"><i class="bi bi-instagram"></i></a>
