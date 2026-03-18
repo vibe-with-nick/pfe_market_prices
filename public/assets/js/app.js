@@ -4,12 +4,12 @@
   if (!el || data.length === 0) return;
 
   const isDark    = document.body.classList.contains('dark');
-  const ink       = isDark ? '#F5F3EF' : '#0E0E0C';
-  const inkMuted  = isDark ? '#A8A49E' : '#8C8880';
-  const gridColor = isDark ? 'rgba(42,42,40,0.8)' : 'rgba(232,228,222,0.7)';
-  const gold      = '#C9A84C';
-  const goldFill  = isDark ? 'rgba(201,168,76,0.06)' : 'rgba(201,168,76,0.05)';
-  const sansFont  = "'Jost', system-ui, sans-serif";
+  const ink       = isDark ? '#ECF0E8' : '#171F14';
+  const inkMuted  = isDark ? '#89A08B' : '#6B7A6C';
+  const gridColor = isDark ? 'rgba(46,74,56,0.55)' : 'rgba(224,217,206,0.70)';
+  const gold      = '#1A8A7C';
+  const goldFill  = isDark ? 'rgba(26,138,124,0.10)' : 'rgba(26,138,124,0.07)';
+  const sansFont  = "'Plus Jakarta Sans', system-ui, sans-serif";
 
   new Chart(el, {
     type: 'line',
@@ -24,7 +24,7 @@
         pointRadius:          3,
         pointHoverRadius:     5,
         pointBackgroundColor: gold,
-        pointBorderColor:     isDark ? '#1C1C1A' : '#FFFFFF',
+        pointBorderColor:     isDark ? '#1F3329' : '#FFFFFF',
         pointBorderWidth:     1.5,
         tension:              0.3,
         fill:                 true,
@@ -43,8 +43,8 @@
           }
         },
         tooltip: {
-          backgroundColor: isDark ? '#1C1C1A' : '#FFFFFF',
-          borderColor:     isDark ? '#2A2A28' : '#E8E4DE',
+          backgroundColor: isDark ? '#1F3329' : '#FFFFFF',
+          borderColor:     isDark ? '#2E4A38' : '#E0D9CE',
           borderWidth:     1,
           titleColor:      ink,
           bodyColor:       inkMuted,
@@ -139,4 +139,29 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   markActiveNavLink();
+
+  /* ── Navbar scroll : ajoute .navbar-scrolled au défilement ── */
+  const nav = document.querySelector('.navbar');
+  if (nav) {
+    const onScroll = () => nav.classList.toggle('navbar-scrolled', window.scrollY > 50);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* ── IntersectionObserver — .animate-on-scroll et .fade-in ── */
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.animate-on-scroll, .fade-in').forEach(el => io.observe(el));
+  } else {
+    /* Fallback navigateurs sans IO */
+    document.querySelectorAll('.animate-on-scroll, .fade-in').forEach(el => el.classList.add('visible'));
+  }
 });
