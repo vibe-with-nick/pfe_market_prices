@@ -42,9 +42,14 @@
   </div>
 </div>
 
-<a class="btn btn-primary" href="<?php echo $app['base_url']; ?>/admin/pending">
-  <?php echo I18n::t('admin.pending'); ?>
-  <?php if ($stats['pending'] > 0): ?>
-    <span class="badge badge-gold ms-2"><?php echo (int)$stats['pending']; ?></span>
-  <?php endif; ?>
-</a>
+<div class="d-flex gap-3 flex-wrap">
+  <a class="btn btn-primary" href="<?php echo $app['base_url']; ?>/admin/pending">
+    <?php echo I18n::t('admin.pending'); ?>
+    <?php if ($stats['pending'] > 0): ?>
+      <span class="badge badge-gold ms-2"><?php echo (int)$stats['pending']; ?></span>
+    <?php endif; ?>
+  </a>
+  <a class="btn btn-outline-secondary" href="<?php echo $app['base_url']; ?>/admin/products">
+    Gérer les produits
+  </a>
+</div>

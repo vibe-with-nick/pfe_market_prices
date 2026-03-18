@@ -26,6 +26,8 @@ switch ($route) {
     case '/admin/pending': $admin->pending(); break;
     case '/admin/approve': $admin->approve(); break;
     case '/admin/reject': $admin->reject(); break;
+    case '/admin/products': $admin->products(); break;
+    case '/admin/products/toggle': $admin->toggleProduct(); break;
     default:
         http_response_code(404);
         view('pages/404', ['route'=>$route]);
