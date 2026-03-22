@@ -29,7 +29,7 @@ try {
   <a href="<?php echo $app['base_url']; ?>/prices/predict" class="mobile-nav-item" data-page="predict">
     <span class="mobile-nav-indicator"></span>
     <i class="bi bi-graph-up-arrow"></i>
-    <span>Predict</span>
+    <span><?php echo I18n::t('predict.title'); ?></span>
   </a>
   <a href="<?php echo $app['base_url']; ?>/prices/submit" class="mobile-nav-item" data-page="submit">
     <span class="mobile-nav-indicator"></span>
@@ -40,13 +40,13 @@ try {
     <a href="<?php echo $app['base_url']; ?>/logout" class="mobile-nav-item" data-page="logout">
       <span class="mobile-nav-indicator"></span>
       <i class="bi bi-box-arrow-right"></i>
-      <span>Logout</span>
+      <span><?php echo I18n::t('nav.logout'); ?></span>
     </a>
   <?php else: ?>
     <a href="<?php echo $app['base_url']; ?>/login" class="mobile-nav-item" data-page="login">
       <span class="mobile-nav-indicator"></span>
       <i class="bi bi-person"></i>
-      <span>Login</span>
+      <span><?php echo I18n::t('nav.login'); ?></span>
     </a>
   <?php endif; ?>
 </nav>
@@ -61,9 +61,9 @@ try {
 <footer>
   <div class="container">
 
-    <!-- Fait du jour -->
+    <!-- Quote -->
     <p class="footer-fait-du-jour">
-      "Les marchés de Maurice, c'est l'histoire d'une île qui nourrit ses habitants depuis des siècles — à l'heure où les étals s'animent à l'aube."
+      <?php echo I18n::t('footer.quote'); ?>
     </p>
 
     <!-- Stats -->
@@ -71,17 +71,17 @@ try {
       <div class="footer-stat-capsule">
         <i class="bi bi-check2-circle"></i>
         <strong><?php echo number_format((int)($footerStats['total_prices']??0)); ?></strong>
-        prix approuvés
+        <?php echo I18n::t('footer.approved_prices'); ?>
       </div>
       <div class="footer-stat-capsule">
         <i class="bi bi-shop"></i>
         <strong><?php echo (int)($footerStats['total_markets']??0); ?></strong>
-        marchés
+        <?php echo I18n::t('footer.markets_count'); ?>
       </div>
       <div class="footer-stat-capsule">
         <i class="bi bi-basket2"></i>
         <strong><?php echo (int)($footerStats['total_products']??0); ?></strong>
-        produits
+        <?php echo I18n::t('footer.products_count'); ?>
       </div>
     </div>
 
@@ -89,8 +89,7 @@ try {
       <div class="col-md-5">
         <h5><?php echo htmlspecialchars($app['app_name']); ?></h5>
         <p style="color:rgba(136,160,139,0.72); line-height:1.8; max-width:340px;">
-          Suivez les prix des fruits et légumes dans les marchés de l'île Maurice.
-          Contribuez, comparez, anticipez.
+          <?php echo I18n::t('footer.description'); ?>
         </p>
         <div class="social-links d-flex gap-2 mt-3">
           <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
@@ -101,10 +100,10 @@ try {
       <div class="col-6 col-md-3">
         <h6>Navigation</h6>
         <ul class="list-unstyled mb-0">
-          <li><a href="<?php echo $app['base_url']; ?>/home">Accueil</a></li>
-          <li><a href="<?php echo $app['base_url']; ?>/prices">Prix du marché</a></li>
-          <li><a href="<?php echo $app['base_url']; ?>/prices/submit">Contribuer</a></li>
-          <li><a href="<?php echo $app['base_url']; ?>/prices/predict">Prédiction IA</a></li>
+          <li><a href="<?php echo $app['base_url']; ?>/home"><?php echo I18n::t('nav.home'); ?></a></li>
+          <li><a href="<?php echo $app['base_url']; ?>/prices"><?php echo I18n::t('footer.market_prices'); ?></a></li>
+          <li><a href="<?php echo $app['base_url']; ?>/prices/submit"><?php echo I18n::t('footer.contribute'); ?></a></li>
+          <li><a href="<?php echo $app['base_url']; ?>/prices/predict"><?php echo I18n::t('footer.ai_prediction'); ?></a></li>
         </ul>
       </div>
       <div class="col-6 col-md-4">
@@ -120,7 +119,7 @@ try {
 
     <hr class="my-4">
     <div class="text-center small">
-      © <?php echo date('Y'); ?> <?php echo htmlspecialchars($app['app_name']); ?> &mdash; Tous droits réservés.
+      © <?php echo date('Y'); ?> <?php echo htmlspecialchars($app['app_name']); ?> &mdash; <?php echo I18n::t('footer.rights'); ?>
     </div>
   </div>
 </footer>

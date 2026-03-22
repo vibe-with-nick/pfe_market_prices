@@ -1,7 +1,7 @@
 <div class="page-header">
-  <span class="section-num">02 — Données du marché</span>
+  <span class="section-num"><?php echo I18n::t('prices.section'); ?></span>
   <h1 class="page-title"><?php echo I18n::t('nav.prices'); ?></h1>
-  <p class="page-subtitle">Prix approuvés en temps réel — Île Maurice</p>
+  <p class="page-subtitle"><?php echo I18n::t('prices.subtitle'); ?></p>
 </div>
 
 <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-3">
@@ -10,7 +10,7 @@
       <div style="min-width:200px; flex:1;">
         <label class="form-label"><?php echo I18n::t('price.market'); ?></label>
         <select name="market_id" class="form-select">
-          <option value="">🏪 Tous les marchés</option>
+          <option value=""><?php echo I18n::t('prices.all_markets'); ?></option>
           <?php foreach ($markets as $m): ?>
             <option value="<?php echo (int)$m['id']; ?>" <?php echo ($marketId==$m['id'])?'selected':''; ?>>
               <?php echo htmlspecialchars($m['name']); ?> — <?php echo htmlspecialchars($m['region']); ?>
@@ -21,7 +21,7 @@
       <div style="min-width:200px; flex:1;">
         <label class="form-label"><?php echo I18n::t('price.product'); ?></label>
         <select name="product_id" class="form-select">
-          <option value="">🥦 Tous les produits</option>
+          <option value=""><?php echo I18n::t('prices.all_products'); ?></option>
           <?php foreach ($products as $p): ?>
             <option value="<?php echo (int)$p['id']; ?>" <?php echo ($productId==$p['id'])?'selected':''; ?>>
               <?php echo htmlspecialchars($p['name']); ?> (<?php echo htmlspecialchars($p['unit']); ?>)
@@ -30,8 +30,8 @@
         </select>
       </div>
       <div>
-        <label class="form-label" style="visibility:hidden; display:block;">Filtrer</label>
-        <button class="btn btn-primary">Filtrer</button>
+        <label class="form-label" style="visibility:hidden; display:block;"><?php echo I18n::t('prices.filter'); ?></label>
+        <button class="btn btn-primary"><?php echo I18n::t('prices.filter'); ?></button>
       </div>
     </form>
   </div>
@@ -46,11 +46,11 @@
       <table class="table table-hover align-middle mb-0">
         <thead>
           <tr>
-            <th>Produit</th>
-            <th>Marché</th>
-            <th>Prix</th>
-            <th>Date</th>
-            <th>Contributeur</th>
+            <th><?php echo I18n::t('col.product'); ?></th>
+            <th><?php echo I18n::t('col.market'); ?></th>
+            <th><?php echo I18n::t('col.price'); ?></th>
+            <th><?php echo I18n::t('col.date'); ?></th>
+            <th><?php echo I18n::t('col.contributor'); ?></th>
           </tr>
         </thead>
         <tbody>
@@ -73,7 +73,7 @@
           <?php endforeach; ?>
           <?php if (!$rows): ?>
             <tr>
-              <td colspan="5" class="text-muted text-center" style="padding:3rem;">Aucun résultat pour ces critères.</td>
+              <td colspan="5" class="text-muted text-center" style="padding:3rem;"><?php echo I18n::t('prices.no_results'); ?></td>
             </tr>
           <?php endif; ?>
         </tbody>

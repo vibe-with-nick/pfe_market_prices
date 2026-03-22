@@ -1,15 +1,15 @@
 <div class="page-header">
   <span class="section-num">Administration</span>
   <h1 class="page-title"><?php echo I18n::t('admin.pending'); ?></h1>
-  <p class="page-subtitle">Soumissions en attente de validation</p>
+  <p class="page-subtitle"><?php echo I18n::t('admin.pending_subtitle'); ?></p>
 </div>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
   <span class="section-num mb-0" style="font-size:1rem;">
-    <?php echo count($rows); ?> soumission<?php echo count($rows)!==1?'s':''; ?>
+    <?php echo count($rows); ?> <?php echo I18n::t('admin.submissions_label'); ?>
   </span>
   <a class="btn btn-ghost btn-sm" href="<?php echo $app['base_url']; ?>/admin">
-    <i class="bi bi-arrow-left me-1"></i>Tableau de bord
+    <i class="bi bi-arrow-left me-1"></i><?php echo I18n::t('admin.back_dashboard'); ?>
   </a>
 </div>
 
@@ -19,12 +19,12 @@
       <table class="table table-hover align-middle mb-0">
         <thead>
           <tr>
-            <th>Produit</th>
-            <th>Marché</th>
-            <th>Prix</th>
-            <th>Date</th>
-            <th>Contributeur</th>
-            <th>Actions</th>
+            <th><?php echo I18n::t('col.product'); ?></th>
+            <th><?php echo I18n::t('col.market'); ?></th>
+            <th><?php echo I18n::t('col.price'); ?></th>
+            <th><?php echo I18n::t('col.date'); ?></th>
+            <th><?php echo I18n::t('col.contributor'); ?></th>
+            <th><?php echo I18n::t('col.actions'); ?></th>
           </tr>
         </thead>
         <tbody>
@@ -43,14 +43,14 @@
                     <input type="hidden" name="csrf" value="<?php echo htmlspecialchars(Auth::csrfToken()); ?>">
                     <input type="hidden" name="id"   value="<?php echo (int)$r['id']; ?>">
                     <button class="btn btn-success btn-sm" style="font-size:0.72rem;padding:0.38rem 0.85rem;">
-                      <i class="bi bi-check-lg me-1"></i>Approuver
+                      <i class="bi bi-check-lg me-1"></i><?php echo I18n::t('admin.approve'); ?>
                     </button>
                   </form>
                   <form method="post" action="<?php echo $app['base_url']; ?>/admin/reject">
                     <input type="hidden" name="csrf" value="<?php echo htmlspecialchars(Auth::csrfToken()); ?>">
                     <input type="hidden" name="id"   value="<?php echo (int)$r['id']; ?>">
                     <button class="btn btn-outline-danger btn-sm" style="font-size:0.72rem;padding:0.38rem 0.85rem;">
-                      <i class="bi bi-x-lg me-1"></i>Rejeter
+                      <i class="bi bi-x-lg me-1"></i><?php echo I18n::t('admin.reject'); ?>
                     </button>
                   </form>
                 </div>
@@ -61,7 +61,7 @@
             <tr>
               <td colspan="6" class="text-center" style="padding:3.5rem; color:var(--text-muted);">
                 <i class="bi bi-check-circle" style="font-size:2rem; display:block; margin-bottom:0.75rem; opacity:0.4;"></i>
-                Aucune soumission en attente.
+                <?php echo I18n::t('admin.no_pending'); ?>
               </td>
             </tr>
           <?php endif; ?>

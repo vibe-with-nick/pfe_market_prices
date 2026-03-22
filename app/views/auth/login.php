@@ -1,5 +1,5 @@
 <div class="page-header">
-  <span class="section-num">Accès membre</span>
+  <span class="section-num"><?php echo I18n::t('auth.member_access'); ?></span>
   <h1 class="page-title"><?php echo I18n::t('nav.login'); ?></h1>
 </div>
 
@@ -14,7 +14,7 @@
     <div class="mb-3">
       <label class="form-label"><?php echo I18n::t('auth.email'); ?></label>
       <input type="email" name="email" class="form-control" required
-             autocomplete="email" placeholder="votre@email.com">
+             autocomplete="email" placeholder="<?php echo I18n::t('auth.email_placeholder'); ?>">
     </div>
 
     <div class="mb-1">
@@ -41,10 +41,10 @@
   </form>
 
   <p class="text-center mt-3" style="font-size:0.84rem; color:var(--text-muted);">
-    Pas encore de compte ?
+    <?php echo I18n::t('auth.no_account'); ?>
     <a href="<?php echo $app['base_url']; ?>/register"
        style="color:var(--green); font-weight:600; text-decoration:none;">
-      S'inscrire &rarr;
+      <?php echo I18n::t('auth.sign_up'); ?>
     </a>
   </p>
 </div>

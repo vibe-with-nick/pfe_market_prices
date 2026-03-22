@@ -1,5 +1,5 @@
 <div class="page-header">
-  <span class="section-num">Accès membre</span>
+  <span class="section-num"><?php echo I18n::t('auth.member_access'); ?></span>
   <h1 class="page-title"><?php echo I18n::t('nav.register'); ?></h1>
 </div>
 
@@ -20,12 +20,12 @@
     <div class="mb-3">
       <label class="form-label"><?php echo I18n::t('auth.name'); ?></label>
       <input type="text" name="name" class="form-control" required minlength="3"
-             placeholder="Votre nom complet">
+             placeholder="<?php echo I18n::t('auth.name_placeholder'); ?>">
     </div>
     <div class="mb-3">
       <label class="form-label"><?php echo I18n::t('auth.email'); ?></label>
       <input type="email" name="email" class="form-control" required
-             placeholder="votre@email.com">
+             placeholder="<?php echo I18n::t('auth.email_placeholder'); ?>">
     </div>
     <div class="mb-3">
       <label class="form-label"><?php echo I18n::t('auth.password'); ?></label>
@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="mb-4">
-      <label class="form-label">Langue préférée</label>
+      <label class="form-label"><?php echo I18n::t('auth.preferred_lang'); ?></label>
       <select class="form-select" name="lang">
         <option value="fr">🇫🇷 Français</option>
         <option value="en">🇬🇧 English</option>
@@ -52,10 +52,10 @@
   </form>
 
   <p class="text-center mt-3" style="font-size:0.84rem; color:var(--text-muted);">
-    Déjà un compte ?
+    <?php echo I18n::t('auth.already_account'); ?>
     <a href="<?php echo $app['base_url']; ?>/login"
        style="color:var(--green); font-weight:600; text-decoration:none;">
-      Se connecter &rarr;
+      <?php echo I18n::t('auth.sign_in_link'); ?>
     </a>
   </p>
 </div>

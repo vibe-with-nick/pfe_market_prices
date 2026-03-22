@@ -3,31 +3,31 @@
   <h1 class="page-title"><?php echo I18n::t('admin.panel'); ?></h1>
 </div>
 
-<span class="section-num mb-3 d-block" style="font-size:1.1rem;">Vue d'ensemble</span>
+<span class="section-num mb-3 d-block" style="font-size:1.1rem;"><?php echo I18n::t('admin.overview'); ?></span>
 
 <div class="stat-row">
   <div class="stat-card card-postit">
-    <div class="stat-card__label">Utilisateurs</div>
+    <div class="stat-card__label"><?php echo I18n::t('admin.users_label'); ?></div>
     <div class="stat-card__value" data-count-up data-value="<?php echo (int)$stats['users']; ?>"><?php echo (int)$stats['users']; ?></div>
-    <div class="stat-card__sub">comptes enregistrés</div>
+    <div class="stat-card__sub"><?php echo I18n::t('admin.accounts_sub'); ?></div>
   </div>
   <div class="stat-card card-postit">
-    <div class="stat-card__label">Marchés</div>
+    <div class="stat-card__label"><?php echo I18n::t('admin.markets_label'); ?></div>
     <div class="stat-card__value" data-count-up data-value="<?php echo (int)$stats['markets']; ?>"><?php echo (int)$stats['markets']; ?></div>
-    <div class="stat-card__sub">sur l'île Maurice</div>
+    <div class="stat-card__sub"><?php echo I18n::t('admin.markets_sub'); ?></div>
   </div>
   <div class="stat-card card-postit">
-    <div class="stat-card__label">Produits</div>
+    <div class="stat-card__label"><?php echo I18n::t('admin.products_label'); ?></div>
     <div class="stat-card__value" data-count-up data-value="<?php echo (int)$stats['products']; ?>"><?php echo (int)$stats['products']; ?></div>
-    <div class="stat-card__sub">fruits et légumes</div>
+    <div class="stat-card__sub"><?php echo I18n::t('admin.products_sub'); ?></div>
   </div>
   <div class="stat-card card-postit">
-    <div class="stat-card__label">En attente</div>
+    <div class="stat-card__label"><?php echo I18n::t('admin.pending_label'); ?></div>
     <div class="stat-card__value" data-count-up data-value="<?php echo (int)$stats['pending']; ?>"
          style="color:<?php echo $stats['pending']>0 ? 'var(--accent-warm)' : 'var(--text-muted)'; ?>;">
       <?php echo (int)$stats['pending']; ?>
     </div>
-    <div class="stat-card__sub">soumissions à valider</div>
+    <div class="stat-card__sub"><?php echo I18n::t('admin.pending_sub'); ?></div>
   </div>
 </div>
 
@@ -39,6 +39,6 @@
     <?php endif; ?>
   </a>
   <a class="btn btn-outline-secondary" href="<?php echo $app['base_url']; ?>/admin/products">
-    <i class="bi bi-basket2 me-1"></i>Gérer les produits
+    <i class="bi bi-basket2 me-1"></i><?php echo I18n::t('admin.manage_products'); ?>
   </a>
 </div>

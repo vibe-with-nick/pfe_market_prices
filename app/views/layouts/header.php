@@ -30,7 +30,7 @@ $isHome      = ($currentPage === 'home' || $currentPage === '');
       </svg>
       <span style="display:flex; flex-direction:column; line-height:1.15;">
         <span style="font-family:var(--f-handwritten); font-size:1.45rem; font-weight:600; line-height:1.1;"><?php echo htmlspecialchars($app['app_name']); ?></span>
-        <span class="navbar-brand-tagline">Prix du marché · Maurice</span>
+        <span class="navbar-brand-tagline"><?php echo I18n::t('nav.tagline'); ?></span>
       </span>
     </a>
 
@@ -73,7 +73,7 @@ $isHome      = ($currentPage === 'home' || $currentPage === '');
       </ul>
 
       <div class="d-flex gap-1 align-items-center">
-        <button id="themeToggle" class="btn-icon" title="Basculer le thème" onclick="toggleTheme()" type="button">
+        <button id="themeToggle" class="btn-icon" title="<?php echo I18n::t('theme.toggle'); ?>" onclick="toggleTheme()" type="button">
           <i class="bi bi-moon"></i>
         </button>
 

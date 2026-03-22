@@ -20,9 +20,9 @@ $tickerDouble = $tickerHtml . $tickerHtml; /* double pour boucle infinie */
 
 <div class="hero">
   <div class="hero-inner">
-    <!-- Contenu gauche -->
+    <!-- Content left -->
     <div class="hero-content">
-      <span class="section-num fade-up">01 — Marchés de l'Île Maurice</span>
+      <span class="section-num fade-up"><?php echo I18n::t('home.section1'); ?></span>
       <h1 class="display-6 fade-up fade-up-1" style="color:var(--text-light); text-shadow:0 2px 30px rgba(0,0,0,0.18);">
         <?php echo I18n::t('home.title'); ?>
       </h1>
@@ -44,7 +44,7 @@ $tickerDouble = $tickerHtml . $tickerHtml; /* double pour boucle infinie */
     <div class="hero-widget fade-up fade-up-2">
       <div class="hero-price-widget">
         <div class="widget-label">
-          Dernier prix enregistré
+          <?php echo I18n::t('home.latest_price'); ?>
         </div>
         <div class="widget-price" data-count-up data-value="<?php echo number_format((float)$latestForWidget['price_rs'],2,'.',''); ?>">
           Rs <?php echo number_format((float)$latestForWidget['price_rs'],2); ?>
@@ -69,22 +69,22 @@ $tickerDouble = $tickerHtml . $tickerHtml; /* double pour boucle infinie */
 <div class="stats-strip animate-on-scroll" style="margin-top:2.5rem;">
   <div class="stat-item">
     <span class="stat-value" data-count-up data-value="<?php echo (int)($stats['total_prices']??0); ?>"><?php echo number_format((int)($stats['total_prices']??0)); ?></span>
-    <span class="stat-label">Prix soumis</span>
+    <span class="stat-label"><?php echo I18n::t('home.stat_prices'); ?></span>
   </div>
   <div class="stat-item">
     <span class="stat-value" data-count-up data-value="<?php echo (int)($stats['total_markets']??0); ?>"><?php echo (int)($stats['total_markets']??0); ?></span>
-    <span class="stat-label">Marchés</span>
+    <span class="stat-label"><?php echo I18n::t('home.stat_markets'); ?></span>
   </div>
   <div class="stat-item">
     <span class="stat-value" data-count-up data-value="<?php echo (int)($stats['total_products']??0); ?>"><?php echo (int)($stats['total_products']??0); ?></span>
-    <span class="stat-label">Produits</span>
+    <span class="stat-label"><?php echo I18n::t('home.stat_products'); ?></span>
   </div>
 </div>
 <?php endif; ?>
 
 <div class="section-heading" style="margin-top:2rem;">
-  <span class="section-num mb-0">02 — Derniers prix approuvés</span>
-  <a href="<?php echo $app['base_url']; ?>/prices" class="link-gold">Voir tout &rarr;</a>
+  <span class="section-num mb-0"><?php echo I18n::t('home.section2'); ?></span>
+  <a href="<?php echo $app['base_url']; ?>/prices" class="link-gold"><?php echo I18n::t('home.see_all'); ?></a>
 </div>
 
 <div class="card card-price" style="border-left:none;">
@@ -93,10 +93,10 @@ $tickerDouble = $tickerHtml . $tickerHtml; /* double pour boucle infinie */
       <table class="table table-hover align-middle mb-0">
         <thead>
           <tr>
-            <th>Produit</th>
-            <th>Marché</th>
-            <th>Prix</th>
-            <th>Date</th>
+            <th><?php echo I18n::t('col.product'); ?></th>
+            <th><?php echo I18n::t('col.market'); ?></th>
+            <th><?php echo I18n::t('col.price'); ?></th>
+            <th><?php echo I18n::t('col.date'); ?></th>
           </tr>
         </thead>
         <tbody>
@@ -112,7 +112,7 @@ $tickerDouble = $tickerHtml . $tickerHtml; /* double pour boucle infinie */
           <?php endforeach; ?>
           <?php if (!$latest): ?>
             <tr>
-              <td colspan="4" class="text-muted text-center" style="padding:3rem;">Aucune donnée disponible.</td>
+              <td colspan="4" class="text-muted text-center" style="padding:3rem;"><?php echo I18n::t('home.no_data'); ?></td>
             </tr>
           <?php endif; ?>
         </tbody>

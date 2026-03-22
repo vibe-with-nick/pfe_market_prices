@@ -927,10 +927,11 @@ hr { border-color: var(--border-light); opacity: 1; }
 .form-control::placeholder { color: var(--text-muted); opacity: 0.55; }
 
 .form-select {
-  background-image:    url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%231A5632' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
-  background-repeat:   no-repeat;
-  background-position: right 0.75rem center;
-  background-size:     14px 10px;
+  --bs-form-select-bg-img: none;
+  background-image: none !important;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 /* Input group Rs prefix */
@@ -1542,7 +1543,7 @@ body.dark .form-control,body.dark .form-select { background: var(--bg-dark-card)
 body.dark .form-control:focus,body.dark .form-select:focus { background: var(--bg-dark); color: var(--text-light); border-color: #52c993; box-shadow: 0 0 0 3px rgba(82,201,147,0.12); }
 body.dark .form-control::placeholder { color: var(--text-muted-light); }
 body.dark .form-label { color: var(--text-muted-light); }
-body.dark .form-select { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2388A08B' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e"); }
+body.dark .form-select { --bs-form-select-bg-img: none; background-image: none !important; appearance: none; -webkit-appearance: none; -moz-appearance: none; }
 body.dark .input-group-text { background: var(--bg-dark-card); border-color: var(--border-dark); color: #52c993; }
 
 body.dark .alert { background: var(--bg-dark-card); border-color: var(--border-dark); color: var(--text-light); }

@@ -13,7 +13,7 @@ class AuthController {
             $u = $stmt->fetch();
 
             if (!$u || !password_verify($password, $u['password_hash'])) {
-                $error = "Identifiants invalides.";
+                $error = I18n::t('auth.invalid_credentials');
                 view('auth/login', compact('error'));
                 return;
             }
@@ -38,13 +38,13 @@ class AuthController {
             $lang = $_POST['lang'] ?? 'fr';
 
             $errors=[];
-            if ($name==='' || strlen($name)<3) $errors[]="Nom invalide.";
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[]="Email invalide.";
-            if (strlen($password)<8) $errors[]="Mot de passe min 8 caractères.";
+            if ($name==='' || strlen($name)<3) $errors[]=I18n::t('auth.invalid_name');
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[]=I18n::t('auth.invalid_email');
+            if (strlen($password)<8) $errors[]=I18n::t('auth.new_password_short');
 
             $stmt = $pdo->prepare("SELECT id FROM users WHERE email=? LIMIT 1");
             $stmt->execute([$email]);
-            if ($stmt->fetch()) $errors[]="Email déjà utilisé.";
+            if ($stmt->fetch()) $errors[]=I18n::t('auth.email_taken');
 
             if ($errors) { view('auth/register', ['errors'=>$errors]); return; }
 

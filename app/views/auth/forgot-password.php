@@ -1,5 +1,5 @@
 <div class="page-header">
-  <span class="section-num">Accès membre</span>
+  <span class="section-num"><?php echo I18n::t('auth.member_access'); ?></span>
   <h1 class="page-title"><?php echo I18n::t('auth.forgot_password'); ?></h1>
   <p class="page-subtitle"><?php echo I18n::t('auth.forgot_password_hint'); ?></p>
 </div>
@@ -22,7 +22,7 @@
       <div class="mb-4">
         <label class="form-label"><?php echo I18n::t('auth.email'); ?></label>
         <input type="email" name="email" class="form-control" required autofocus
-               placeholder="votre@email.com"
+               placeholder="<?php echo I18n::t('auth.email_placeholder'); ?>"
                value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>">
       </div>
 

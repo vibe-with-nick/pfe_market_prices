@@ -1,7 +1,7 @@
 <div class="page-header">
-  <span class="section-num">02 — Contribution</span>
+  <span class="section-num"><?php echo I18n::t('submit.section'); ?></span>
   <h1 class="page-title"><?php echo I18n::t('price.submit'); ?></h1>
-  <p class="page-subtitle">Votre contribution alimente les données du marché</p>
+  <p class="page-subtitle"><?php echo I18n::t('submit.subtitle'); ?></p>
 </div>
 
 <?php if (!empty($errors)): ?>
@@ -22,7 +22,7 @@
       <div class="col-md-6">
         <label class="form-label"><?php echo I18n::t('price.market'); ?></label>
         <select name="market_id" class="form-select" required>
-          <option value="">🏪 Choisir un marché</option>
+          <option value=""><?php echo I18n::t('submit.choose_market'); ?></option>
           <?php foreach ($markets as $m): ?>
             <option value="<?php echo (int)$m['id']; ?>">
               <?php echo htmlspecialchars($m['name']); ?> (<?php echo htmlspecialchars($m['region']); ?>)
@@ -33,7 +33,7 @@
       <div class="col-md-6">
         <label class="form-label"><?php echo I18n::t('price.product'); ?></label>
         <select name="product_id" class="form-select" required>
-          <option value="">🥦 Choisir un produit</option>
+          <option value=""><?php echo I18n::t('submit.choose_product'); ?></option>
           <?php foreach ($products as $p): ?>
             <option value="<?php echo (int)$p['id']; ?>">
               <?php echo htmlspecialchars($p['name']); ?> (<?php echo htmlspecialchars($p['unit']); ?>)
@@ -57,13 +57,13 @@
       </div>
       <div class="col-md-4">
         <label class="form-label"><?php echo I18n::t('price.source'); ?></label>
-        <input type="text" name="source" class="form-control" placeholder="Ex : visite marché">
+        <input type="text" name="source" class="form-control" placeholder="<?php echo I18n::t('submit.source_placeholder'); ?>">
       </div>
     </div>
 
     <div class="mb-4">
       <label class="form-label"><?php echo I18n::t('price.note'); ?></label>
-      <textarea name="note" class="form-control" rows="3" placeholder="Remarques supplémentaires…"></textarea>
+      <textarea name="note" class="form-control" rows="3" placeholder="<?php echo I18n::t('submit.note_placeholder'); ?>"></textarea>
     </div>
 
     <button class="btn btn-primary" type="submit" id="submitBtn">
@@ -80,13 +80,13 @@
         <div class="mb-3">
           <i class="bi bi-check-circle-fill" style="font-size:3.5rem;color:var(--accent-up);"></i>
         </div>
-        <h5 style="font-family:var(--f-serif);font-size:1.6rem;font-weight:700;margin-bottom:0.5rem;">Contribution soumise !</h5>
-        <p class="text-muted mb-4">Merci pour votre contribution. Le prix sera visible après validation par notre équipe.</p>
+        <h5 style="font-family:var(--f-serif);font-size:1.6rem;font-weight:700;margin-bottom:0.5rem;"><?php echo I18n::t('submit.success_title'); ?></h5>
+        <p class="text-muted mb-4"><?php echo I18n::t('submit.success_msg'); ?></p>
         <div class="d-flex gap-2 justify-content-center">
           <a href="<?php echo $app['base_url']; ?>/prices" class="btn btn-primary">
-            <i class="bi bi-bar-chart-line me-1"></i>Voir les prix
+            <i class="bi bi-bar-chart-line me-1"></i><?php echo I18n::t('submit.see_prices'); ?>
           </a>
-          <button type="button" class="btn btn-ghost" data-bs-dismiss="modal">Soumettre un autre</button>
+          <button type="button" class="btn btn-ghost" data-bs-dismiss="modal"><?php echo I18n::t('submit.another'); ?></button>
         </div>
       </div>
     </div>

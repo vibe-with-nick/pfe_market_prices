@@ -1,5 +1,5 @@
 <div class="page-header">
-  <span class="section-num">Paramètres du compte</span>
+  <span class="section-num"><?php echo I18n::t('auth.member_access'); ?></span>
   <h1 class="page-title"><?php echo I18n::t('auth.change_password'); ?></h1>
 </div>
 

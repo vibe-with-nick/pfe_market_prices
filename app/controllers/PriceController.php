@@ -57,10 +57,10 @@ class PriceController {
             $note      = trim($_POST['note']   ?? '');
 
             $errors = [];
-            if ($marketId  <= 0) $errors[] = "Marché requis.";
-            if ($productId <= 0) $errors[] = "Produit requis.";
-            if ($priceRs   <= 0) $errors[] = "Prix invalide.";
-            if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $priceDate)) $errors[] = "Date invalide.";
+            if ($marketId  <= 0) $errors[] = I18n::t('price.market_required');
+            if ($productId <= 0) $errors[] = I18n::t('price.product_required');
+            if ($priceRs   <= 0) $errors[] = I18n::t('price.invalid_price');
+            if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $priceDate)) $errors[] = I18n::t('price.invalid_date');
 
             if ($errors) {
                 view('prices/submit', compact('markets', 'products', 'errors'));
@@ -138,6 +138,6 @@ class PriceController {
         if ($resp === false || $code !== 200) {
             return ['ok' => false, 'message' => "ML indisponible: {$err} (HTTP {$code})"];
         }
-        return json_decode($resp, true) ?: ['ok' => false, 'message' => 'Réponse ML invalide'];
+        return json_decode($resp, true) ?: ['ok' => false, 'message' => I18n::t('predict.ml_error')];
     }
 }
