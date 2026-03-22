@@ -8,7 +8,7 @@
     <div class="alert alert-danger mb-4"><?php echo htmlspecialchars($error); ?></div>
   <?php endif; ?>
 
-  <form method="post" class="card" style="padding: 2.5rem;">
+  <form method="post" class="auth-card" style="max-width:100%; margin:0 0 1.5rem;">
     <input type="hidden" name="csrf" value="<?php echo htmlspecialchars(Auth::csrfToken()); ?>">
 
     <div class="mb-3">
@@ -17,7 +17,7 @@
              autocomplete="email" placeholder="votre@email.com">
     </div>
 
-    <div class="mb-4">
+    <div class="mb-1">
       <label class="form-label"><?php echo I18n::t('auth.password'); ?></label>
       <div class="position-relative">
         <input type="password" name="password" id="password" class="form-control"
@@ -28,24 +28,23 @@
       </div>
     </div>
 
-    <button class="btn btn-primary w-100" type="submit" id="submitBtn">
-      <?php echo I18n::t('auth.login'); ?>
-    </button>
-
-    <p class="text-center mt-4 mb-0" style="font-size:0.8rem; letter-spacing:0.04em;">
+    <p class="mb-4" style="font-size:0.82rem; margin-top:0.5rem;">
       <a href="<?php echo $app['base_url']; ?>/forgot-password"
-         style="color:var(--text-muted); text-decoration:none; transition:color .3s;"
-         onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">
+         style="font-family:var(--f-handwritten);font-size:0.95rem;color:var(--text-muted);text-decoration:none;border-bottom:1px dashed var(--border-light);">
         <?php echo I18n::t('auth.forgot_password_link'); ?>
       </a>
     </p>
+
+    <button class="btn btn-primary w-100" type="submit" id="submitBtn">
+      <?php echo I18n::t('auth.login'); ?>
+    </button>
   </form>
 
-  <p class="text-center mt-4" style="font-size:0.82rem; letter-spacing:0.04em; color:var(--text-muted);">
+  <p class="text-center mt-3" style="font-size:0.84rem; color:var(--text-muted);">
     Pas encore de compte ?
     <a href="<?php echo $app['base_url']; ?>/register"
-       style="color:var(--text-dark); font-weight:500; text-decoration:none;">
-      S'inscrire
+       style="color:var(--green); font-weight:600; text-decoration:none;">
+      S'inscrire &rarr;
     </a>
   </p>
 </div>

@@ -24,7 +24,7 @@ class Auth {
     }
     public static function verifyCsrf(): void {
         self::start();
-        $t = $_POST['csrf_token'] ?? '';
+        $t = $_POST['csrf'] ?? '';
         if (!$t || !hash_equals($_SESSION['csrf'] ?? '', $t)) { http_response_code(403); exit('CSRF invalide'); }
     }
 }

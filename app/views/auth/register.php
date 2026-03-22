@@ -14,7 +14,7 @@
     </div>
   <?php endif; ?>
 
-  <form method="post" class="card" style="padding: 2.5rem;">
+  <form method="post" class="auth-card" style="max-width:100%; margin:0 0 1.5rem;">
     <input type="hidden" name="csrf" value="<?php echo htmlspecialchars(Auth::csrfToken()); ?>">
 
     <div class="mb-3">
@@ -38,11 +38,11 @@
       </div>
     </div>
     <div class="mb-4">
-      <label class="form-label">Langue</label>
+      <label class="form-label">Langue préférée</label>
       <select class="form-select" name="lang">
-        <option value="fr">Français</option>
-        <option value="en">English</option>
-        <option value="mfe">Kreol</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="mfe">🇲🇺 Kreol</option>
       </select>
     </div>
 
@@ -51,11 +51,11 @@
     </button>
   </form>
 
-  <p class="text-center mt-4" style="font-size:0.82rem; letter-spacing:0.04em; color:var(--text-muted);">
+  <p class="text-center mt-3" style="font-size:0.84rem; color:var(--text-muted);">
     Déjà un compte ?
     <a href="<?php echo $app['base_url']; ?>/login"
-       style="color:var(--text-dark); font-weight:500; text-decoration:none;">
-      Se connecter
+       style="color:var(--green); font-weight:600; text-decoration:none;">
+      Se connecter &rarr;
     </a>
   </p>
 </div>

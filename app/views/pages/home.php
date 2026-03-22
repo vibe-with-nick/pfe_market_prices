@@ -1,26 +1,93 @@
+<?php
+/* Dernier prix approuvé pour le widget hero */
+$latestForWidget = $latest[0] ?? null;
+
+/* Items ticker — on duplique pour boucle seamless */
+$tickerItems = [];
+foreach ($latest as $r) {
+  $tickerItems[] = htmlspecialchars($r['product']) . ' <span class="ticker-price">Rs ' . number_format((float)$r['price_rs'],2) . '</span>';
+}
+/* Fallback si vide */
+if (empty($tickerItems)) {
+  $tickerItems = ['Tomate <span class="ticker-price">Rs 45</span>','Carotte <span class="ticker-price">Rs 38</span>','Pomme de terre <span class="ticker-price">Rs 32</span>','Oignon <span class="ticker-price">Rs 55</span>','Mangue <span class="ticker-price">Rs 28</span>'];
+}
+$tickerHtml = '';
+foreach ($tickerItems as $item) {
+  $tickerHtml .= '<span class="ticker-item">' . $item . '<span class="ticker-sep">·</span></span>';
+}
+$tickerDouble = $tickerHtml . $tickerHtml; /* double pour boucle infinie */
+?>
+
 <div class="hero">
-  <span class="section-num">01 &mdash; Marchés de l'Île Maurice</span>
-  <h1 class="display-6"><?php echo I18n::t('home.title'); ?></h1>
-  <span class="title-rule"></span>
-  <p><?php echo I18n::t('home.subtitle'); ?></p>
-  <div class="d-flex gap-3 flex-wrap">
-    <a class="btn btn-primary" href="<?php echo $app['base_url']; ?>/prices">
-      <?php echo I18n::t('btn.view_prices'); ?>
-    </a>
-    <a class="btn btn-outline-secondary" href="<?php echo $app['base_url']; ?>/prices/submit">
-      <?php echo I18n::t('btn.contribute'); ?>
-    </a>
+  <div class="hero-inner">
+    <!-- Contenu gauche -->
+    <div class="hero-content">
+      <span class="section-num fade-up">01 — Marchés de l'Île Maurice</span>
+      <h1 class="display-6 fade-up fade-up-1" style="color:var(--text-light); text-shadow:0 2px 30px rgba(0,0,0,0.18);">
+        <?php echo I18n::t('home.title'); ?>
+      </h1>
+      <span class="title-rule fade-up fade-up-1"></span>
+      <p class="fade-up fade-up-2"><?php echo I18n::t('home.subtitle'); ?></p>
+      <div class="d-flex gap-3 flex-wrap fade-up fade-up-3">
+        <a class="btn btn-primary" href="<?php echo $app['base_url']; ?>/prices">
+          <i class="bi bi-bar-chart-line me-1"></i><?php echo I18n::t('btn.view_prices'); ?>
+        </a>
+        <a class="btn btn-outline-secondary" href="<?php echo $app['base_url']; ?>/prices/submit"
+           style="border-color:rgba(255,255,255,0.25); color:#fff;">
+          <i class="bi bi-plus-circle me-1"></i><?php echo I18n::t('btn.contribute'); ?>
+        </a>
+      </div>
+    </div>
+
+    <!-- Widget prix en direct -->
+    <?php if ($latestForWidget): ?>
+    <div class="hero-widget fade-up fade-up-2">
+      <div class="hero-price-widget">
+        <div class="widget-label">
+          Dernier prix enregistré
+        </div>
+        <div class="widget-price" data-count-up data-value="<?php echo number_format((float)$latestForWidget['price_rs'],2,'.',''); ?>">
+          Rs <?php echo number_format((float)$latestForWidget['price_rs'],2); ?>
+        </div>
+        <div class="widget-product"><?php echo htmlspecialchars($latestForWidget['product']); ?></div>
+        <div class="widget-market"><i class="bi bi-shop me-1"></i><?php echo htmlspecialchars($latestForWidget['market']); ?></div>
+        <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.08); font-size:0.75rem; color:rgba(136,160,139,0.65);">
+          <?php echo htmlspecialchars($latestForWidget['price_date']); ?>
+        </div>
+      </div>
+    </div>
+    <?php endif; ?>
+  </div>
+
+  <!-- Ticker bande défilante -->
+  <div class="hero-ticker">
+    <div class="ticker-track"><?php echo $tickerDouble; ?></div>
   </div>
 </div>
 
-<div class="section-heading">
-  <span class="section-num mb-0">02 &mdash; Derniers prix approuvés</span>
-  <a href="<?php echo $app['base_url']; ?>/prices" class="link-gold">
-    Voir tout
-  </a>
+<?php if (!empty($stats)): ?>
+<div class="stats-strip animate-on-scroll" style="margin-top:2.5rem;">
+  <div class="stat-item">
+    <span class="stat-value" data-count-up data-value="<?php echo (int)($stats['total_prices']??0); ?>"><?php echo number_format((int)($stats['total_prices']??0)); ?></span>
+    <span class="stat-label">Prix soumis</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-value" data-count-up data-value="<?php echo (int)($stats['total_markets']??0); ?>"><?php echo (int)($stats['total_markets']??0); ?></span>
+    <span class="stat-label">Marchés</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-value" data-count-up data-value="<?php echo (int)($stats['total_products']??0); ?>"><?php echo (int)($stats['total_products']??0); ?></span>
+    <span class="stat-label">Produits</span>
+  </div>
+</div>
+<?php endif; ?>
+
+<div class="section-heading" style="margin-top:2rem;">
+  <span class="section-num mb-0">02 — Derniers prix approuvés</span>
+  <a href="<?php echo $app['base_url']; ?>/prices" class="link-gold">Voir tout &rarr;</a>
 </div>
 
-<div class="card">
+<div class="card card-price" style="border-left:none;">
   <div class="card-body" style="padding:0;">
     <div class="table-responsive">
       <table class="table table-hover align-middle mb-0">
@@ -33,19 +100,19 @@
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($latest as $r): ?>
-            <tr>
+          <?php foreach ($latest as $i => $r): ?>
+            <tr class="animate-on-scroll" style="transition-delay:<?php echo $i*0.05; ?>s;">
               <td><?php echo htmlspecialchars($r['product']); ?></td>
-              <td><?php echo htmlspecialchars($r['market']); ?></td>
-              <td class="fw-bold">Rs&nbsp;<?php echo number_format((float)$r['price_rs'], 2); ?></td>
-              <td><?php echo htmlspecialchars($r['price_date']); ?></td>
+              <td style="color:var(--text-muted); font-size:0.85rem;"><?php echo htmlspecialchars($r['market']); ?></td>
+              <td>
+                <span class="price-pill">Rs&nbsp;<?php echo number_format((float)$r['price_rs'],2); ?></span>
+              </td>
+              <td style="color:var(--text-muted); font-size:0.8rem;"><?php echo htmlspecialchars($r['price_date']); ?></td>
             </tr>
           <?php endforeach; ?>
           <?php if (!$latest): ?>
             <tr>
-              <td colspan="4" class="text-muted text-center" style="padding:3rem;">
-                Aucune donnée disponible.
-              </td>
+              <td colspan="4" class="text-muted text-center" style="padding:3rem;">Aucune donnée disponible.</td>
             </tr>
           <?php endif; ?>
         </tbody>

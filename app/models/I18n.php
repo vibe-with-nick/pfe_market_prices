@@ -6,8 +6,11 @@ class I18n {
     public static function lang(): string {
         if (self::$lang === '') {
             Auth::start();
-            $default    = Config::get('default_lang', 'fr');
-            $l          = $_GET['lang'] ?? ($_SESSION['user']['lang'] ?? $default);
+            $default = Config::get('default_lang', 'fr');
+            if (isset($_GET['lang']) && in_array($_GET['lang'], ['fr', 'en', 'mfe'], true)) {
+                $_SESSION['lang'] = $_GET['lang'];
+            }
+            $l = $_SESSION['lang'] ?? ($_SESSION['user']['lang'] ?? $default);
             self::$lang = in_array($l, ['fr', 'en', 'mfe'], true) ? $l : 'fr';
         }
         return self::$lang;
